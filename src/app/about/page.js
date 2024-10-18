@@ -1,9 +1,4 @@
-import { Agdasima } from "next/font/google";
-
-const googleFont = Agdasima({
-  weight: ['700'],
-  subsets: ['latin']
-})
+export const runtime = "edge";
 
 export default function AboutPage() {
     return (

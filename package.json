@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export"
+    "pages:build": "npx @cloudflare/next-on-pages"
   },
   "dependencies": {
     "@next/font": "^14.2.15",
@@ -19,6 +19,7 @@
     "remark-html": "^16.0.1"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
   }

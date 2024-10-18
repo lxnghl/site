@@ -1,5 +1,7 @@
 import ArticleCard from '../components/ArticleCard';
-import { articles } from '../../../content/articles'
+import { articles } from '../../../content/articles';
+
+export const runtime = "edge";
 
 export default function BlogPage() {
 
