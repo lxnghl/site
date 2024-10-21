@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Roboto, Roboto_Condensed, Roboto_Flex, Roboto_Mono, Roboto_Serif, Roboto_Slab } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 
 const googleFont = Roboto({
     weight: ['300'], // Choose the font weights you need
