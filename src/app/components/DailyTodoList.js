@@ -81,7 +81,10 @@ const DailyTodoList = () => {
   };
 
   const handleDeleteTodo = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this todo?");
+    const confirmDelete = null;
+    if (typeof window !== 'undefined') {
+      confirmDelete = window.confirm("Are you sure you want to delete this todo?");
+    }
     if (confirmDelete) {
       const { error } = await supabase
         .from('todos')
@@ -122,7 +125,7 @@ const DailyTodoList = () => {
   return (
     <div className="flex justify-center items-start min-h-screen">
       <div className="w-full md:w-3/5 bg-white shadow-lg rounded-lg p-6">
-        <DateNavigator currentDate={currentDate} formatDate={formatDate} setCurrentDate={setCurrentDate}/>
+        <DateNavigator currentDate={currentDate} formatDate={formatDate} setCurrentDate={setCurrentDate} />
 
         <AddTodo newTask={newTask} setNewTask={setNewTask} handleAddTodo={handleAddTodo} />
 
