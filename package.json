@@ -33,5 +33,6 @@
   "main": "src/app/page.js",
   "repository": "git@github.com:absinthian/site.git",
   "author": "Alex Anghel <alex@alexanghel.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "yarn@4.5.1"
 }
