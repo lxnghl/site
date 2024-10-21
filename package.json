@@ -21,7 +21,9 @@
     "react-dom": "^18",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "tar": "^7.4.3"
+    "tar": "^7.4.3",
+    "vercel": "^37.12.0",
+    "wrangler": "^3.81.0"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.5",
