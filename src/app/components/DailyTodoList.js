@@ -81,7 +81,7 @@ const DailyTodoList = () => {
   };
 
   const handleDeleteTodo = async (id) => {
-    const confirmDelete = null;
+    let confirmDelete = null;
     if (typeof window !== 'undefined') {
       confirmDelete = window.confirm("Are you sure you want to delete this todo?");
     }
