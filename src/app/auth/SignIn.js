@@ -12,7 +12,7 @@ const SignIn = ({ onToggle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signIn({ email, password });
+      await signIn({ email, password, redirectTo: "http://alexanghel.com/todos" });
     } catch (error) {
       console.error('Error signing in', error);
     }

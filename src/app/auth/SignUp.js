@@ -12,7 +12,7 @@ const SignUp = ({ onToggle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signUp({ email, password, redirectTo: "http://localhost:3000/todos" });
+      await signUp({ email, password, redirectTo: "http://alexanghel.com/todos" });
     } catch (error) {
       console.error('Error signing up', error);
     }
