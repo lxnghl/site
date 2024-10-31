@@ -5,6 +5,8 @@ import EditIcon from './EditIcon';
 import DateNavigator from './DateNavigator';
 import AddTodo from './AddTodo';
 import { formatDate, formatDateTime } from '../../lib/DateFormatter';
+import { useAtom } from 'jotai';
+import { userAtom } from '../atoms/authAtoms';
 
 const DailyTodoList = () => {
   const [currentDate, setCurrentDate] = useState(formatDate(new Date()));
@@ -12,6 +14,7 @@ const DailyTodoList = () => {
   const [newTask, setNewTask] = useState('');
   const [editTodoId, setEditTodoId] = useState(null); // Track which todo is being edited
   const [editTask, setEditTask] = useState(''); // Track the edited task text
+  const [user] = useAtom(userAtom);
 
   useEffect(() => {
     loadTodos(currentDate);
@@ -19,17 +22,16 @@ const DailyTodoList = () => {
 
   // Load todos for the current date from Supabase
   const loadTodos = async (date) => {
-    // console.log('Loading todos for date:', date); // Debug log
     const { data, error } = await supabase
       .from('todos')
       .select('*')
-      .eq('date', date); // Filter by the current date in YYYY-MM-DD format
+      .eq('date', date) // Filter by the current date in YYYY-MM-DD format
+      .eq('owner', user.id);
 
     if (error) {
       console.error('Error loading todos:', error);
       setTodoList([]);
     } else {
-      // console.log('Fetched todos:', data); // Debug log
       setTodoList(data);
     }
   };
@@ -42,20 +44,18 @@ const DailyTodoList = () => {
       completed: false,
       createdAt: new Date().toISOString(), // Ensure this matches your database column name
       date: currentDate, // Use the current date in YYYY-MM-DD format
+      owner: user.id
     };
 
     // Insert the new todo into Supabase
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('todos')
       .insert([newTodo]);
 
     if (error) {
       console.error('Error adding todo:', error);
     } else {
-      // Clear the input after successful insertion
-      setNewTask('');
-
-      // Fetch the todos again to reflect the newly added todo
+      setNewTask(''); // Clear the input after successful insertion
       loadTodos(currentDate); // Re-fetch the todos for the current date
     }
   };
@@ -64,7 +64,7 @@ const DailyTodoList = () => {
     const updatedCompleted = !currentCompleted;
     const completedAt = updatedCompleted ? new Date().toISOString() : null;
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('todos')
       .update({ completed: updatedCompleted, completedAt: completedAt })
       .eq('id', id);
@@ -81,10 +81,7 @@ const DailyTodoList = () => {
   };
 
   const handleDeleteTodo = async (id) => {
-    let confirmDelete = null;
-    if (typeof window !== 'undefined') {
-      confirmDelete = window.confirm("Are you sure you want to delete this todo?");
-    }
+    const confirmDelete = window.confirm("Are you sure you want to delete this todo?");
     if (confirmDelete) {
       const { error } = await supabase
         .from('todos')
@@ -108,7 +105,7 @@ const DailyTodoList = () => {
   const handleUpdateTodo = async (id) => {
     if (!editTask.trim()) return; // Prevent saving empty task
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('todos')
       .update({ task: editTask })
       .match({ id });
@@ -123,13 +120,12 @@ const DailyTodoList = () => {
   };
 
   return (
-    <div className="flex justify-center items-start min-h-screen">
-      <div className="w-full md:w-3/5 bg-white shadow-lg rounded-lg p-6">
+    <div className="flex flex-col justify-center items-center flex-grow overflow-auto">
+      <div className="w-full md:w-3/5 bg-white shadow-2xl rounded-lg p-8 mb-2">
         <DateNavigator currentDate={currentDate} formatDate={formatDate} setCurrentDate={setCurrentDate} />
-
+  
         <AddTodo newTask={newTask} setNewTask={setNewTask} handleAddTodo={handleAddTodo} />
-
-        {/* To-do list */}
+  
         <ul className="space-y-2">
           {todoList.length > 0 ? (
             todoList.map((todo) => (
@@ -144,10 +140,9 @@ const DailyTodoList = () => {
                   onChange={() => handleToggleTodo(todo.id, todo.completed)}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-
+  
                 <div className="flex-grow text-black">
-
-                  {editTodoId === todo.id && editTask.completed != false ? (
+                  {editTodoId === todo.id && editTask.completed !== false ? (
                     <input
                       type="text"
                       value={editTask}
@@ -160,20 +155,19 @@ const DailyTodoList = () => {
                       {todo.task}
                     </span>
                   )}
-
+  
                   <div className="flex justify-between text-gray-500 text-xs">
                     <span>{`Created: ${formatDateTime(todo.createdAt)}`}</span>
                     <span>{todo.completedAt ? `Done: ${formatDateTime(todo.completedAt)}` : null}</span>
                   </div>
                 </div>
-
+  
                 <EditIcon onClick={() => handleEdit(todo)} />
                 <DeleteIcon onClick={() => handleDeleteTodo(todo.id)} />
-
               </li>
             ))
           ) : (
-            <li className="p-4 bg-gray-100 rounded">No tasks for this day</li>
+            <li className="p-4 bg-gray-100 rounded text-black">No tasks for this day</li>
           )}
         </ul>
       </div>

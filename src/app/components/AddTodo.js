@@ -9,7 +9,7 @@ const AddTodo = ({ newTask, setNewTask, handleAddTodo }) => {
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
         placeholder="New task"
-        className="border rounded p-2 flex-grow mr-2"
+        className="border rounded p-2 flex-grow mr-2 text-black"
       />
       <button
         onClick={handleAddTodo}
