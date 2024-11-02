@@ -7,24 +7,17 @@ export const userAtom = atom(null);
 // Atom to sign up the user
 export const signUpAtom = atom(
   (get) => get(userAtom),
-  async (get, set, { email, password, redirectTo }) => {
+  async (get, set, { email, password }) => {
     const { data, error } = await supabase.auth.signUp(
       {
         email,
-        password,
-        options: {
-          emailRedirectTo: redirectTo,
-        },
+        password
       }
     );
     if (error) {
       throw error;
     }
     set(userAtom, data.user);
-    // Optionally handle redirect after successful sign-up
-    if (redirectTo) {
-      window.location.href = redirectTo; // Redirect the user
-    }
   }
 );
 
@@ -39,10 +32,6 @@ export const signInAtom = atom(
       throw error;
     }
     set(userAtom, data.user);
-    // Optionally handle redirect after successful sign-in
-    if (redirectTo) {
-      window.location.href = redirectTo; // Redirect the user
-    }
   }
 );
 
@@ -52,24 +41,5 @@ export const signOutAtom = atom(
   async (get, set) => {
     await supabase.auth.signOut();
     set(userAtom, null);
-  }
-);
-
-// Atom to initialize the session when the app loads
-export const sessionAtom = atom(null);
-
-export const initSessionAtom = atom(
-  null,
-  async (get, set) => {
-    const { data: { session } } = await supabase.auth.getSession();
-    set(userAtom, session?.user ?? null);
-
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      set(userAtom, session?.user ?? null);
-    });
-
-    return () => {
-      authListener?.unsubscribe();
-    };
   }
 );

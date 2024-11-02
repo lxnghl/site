@@ -68,21 +68,11 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-gray-800">
-          <Link href="/" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}>
-            Home
-          </Link>
-          <Link href="/blog" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}>
-            Blog
-          </Link>
-          <Link href="/about" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}>
-            About
-          </Link>
-          <Link href="/contact" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}>
-            Contact
-          </Link>
-          <Link href="/todos" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}>
-            Todos
-          </Link>
+          <Link href="/" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Home </Link>
+          <Link href="/blog" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Blog </Link>
+          <Link href="/todos" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Todos </Link>
+          <Link href="/about" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> About </Link>
+          <Link href="/contact" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Contact </Link>
           {user && (
             <>
               <span className="block px-4 py-2 text-white">

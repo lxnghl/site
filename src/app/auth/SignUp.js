@@ -12,7 +12,7 @@ const SignUp = ({ onToggle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signUp({ email, password, redirectTo: "http://alexanghel.com/todos" });
+      await signUp({ email, password });
     } catch (error) {
       console.error('Error signing up', error);
     }
@@ -20,7 +20,7 @@ const SignUp = ({ onToggle }) => {
 
   return (
     <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full text-center">
-      <h2 className="text-2xl font-bold mb-6 text-black">Sign Up</h2>
+      <h2 className="text-2xl font-bold mb-6 text-black">New user</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="email"

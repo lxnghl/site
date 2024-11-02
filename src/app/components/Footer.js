@@ -8,9 +8,9 @@ const Footer = () => {
         <div className="text-white text-sm leading-5"> {/* Smaller text with line height */}
           &copy; {new Date().getFullYear()} My Blog. All rights reserved.
         </div>
-        <div className="flex space-x-6">
-          <Link href="/privacy" className="text-white hover:text-gray-400">Privacy</Link>
-          <Link href="/terms" className="text-white hover:text-gray-400">Terms</Link>
+        <div className="flex space-x-6 text-white text-sm">
+          <p>Privacy</p>
+          <p>Terms</p>
         </div>
       </div>
     </footer>
