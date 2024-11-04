@@ -1,6 +1,8 @@
 import { atom } from 'jotai';
 import { supabase } from '../../lib/supabase';
 
+const redirectTo = process.env.REDIRECT_TO_TODOS_LINK;
+
 // Atom to store user session
 export const userAtom = atom(null);
 
@@ -13,7 +15,7 @@ export const signUpAtom = atom(
         email,
         password,
         options: {
-          emailRedirectTo: 'http://localhost:3000/todos'
+          emailRedirectTo: redirectTo
         }
       }
     );
