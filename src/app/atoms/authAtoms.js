@@ -11,7 +11,10 @@ export const signUpAtom = atom(
     const { data, error } = await supabase.auth.signUp(
       {
         email,
-        password
+        password,
+        options: {
+          emailRedirectTo: 'http://localhost:3000/todos'
+        }
       }
     );
     if (error) {
@@ -23,7 +26,7 @@ export const signUpAtom = atom(
 
 export const signInAtom = atom(
   (get) => get(userAtom),
-  async (get, set, { email, password, redirectTo }) => {
+  async (get, set, { email, password }) => {
     const { error, data } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -41,5 +44,21 @@ export const signOutAtom = atom(
   async (get, set) => {
     await supabase.auth.signOut();
     set(userAtom, null);
+  }
+);
+
+// Atom to initialize the session when the app loads
+export const sessionAtom = atom(null);
+export const initSessionAtom = atom(
+  null,
+  async (get, set) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    set(userAtom, session?.user ?? null);
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      set(userAtom, session?.user ?? null);
+    });
+    return () => {
+      authListener?.unsubscribe();
+    };
   }
 );

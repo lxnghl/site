@@ -14,7 +14,10 @@ const AuthPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (user) {
+    if (user != null && user.last_sign_in_at == null) {
+      router.push('/verify-email');
+    }
+    else if (user != null && user.last_sign_in_at != null) {
       router.push('/todos'); // Redirect to todos when user is set
     }
   }, [user, router]);

@@ -32,7 +32,7 @@ const Navbar = () => {
           <Link href="/todos" className="text-white hover:text-gray-400"> Todos </Link>
           <Link href="/about" className="text-white hover:text-gray-400"> About </Link>
           <Link href="/contact" className="text-white hover:text-gray-400"> Contact </Link>
-          {user && (
+          {(user != null && user.last_sign_in_at != null) && (
             <>
               <span className="text-white">Welcome, {user.email}!</span>
               <button
@@ -73,7 +73,7 @@ const Navbar = () => {
           <Link href="/todos" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Todos </Link>
           <Link href="/about" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> About </Link>
           <Link href="/contact" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Contact </Link>
-          {user && (
+          {(user != null && user.last_sign_in_at != null) && (
             <>
               <span className="block px-4 py-2 text-white">
                 Welcome, {user.email}!
