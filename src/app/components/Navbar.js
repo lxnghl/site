@@ -21,10 +21,6 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const handleSearch = (query) => {
-    console.log("Search Query:", query); // Replace with your search logic
-  };
-
   return (
     <nav className="bg-gray-800 p-4 fixed top-0 w-full">
       <div className="container mx-auto flex justify-between items-center">
@@ -32,7 +28,7 @@ const Navbar = () => {
           <Link href="/">My Blog</Link>
         </div>
         <div className="hidden md:flex items-center space-x-6">
-          <Search onSearch={handleSearch} />
+          <Search />
           <Link href="/" className="text-white hover:text-gray-400"> Home </Link>
           <Link href="/blog" className="text-white hover:text-gray-400"> Blog </Link>
           <Link href="/todos" className="text-white hover:text-gray-400"> Todos </Link>
@@ -73,7 +69,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-gray-800">
-          <Search onSearch={handleSearch} />
+          <Search />
           <Link href="/" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Home </Link>
           <Link href="/blog" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Blog </Link>
           <Link href="/todos" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Todos </Link>

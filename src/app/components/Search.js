@@ -1,15 +1,40 @@
 "use client";
 
 import { useState } from "react";
+import { supabase } from '@/lib/supabase';
+import { useSetAtom } from 'jotai';
+import { todoListAtom } from '../atoms/authAtoms';
 
-const SearchComp = ({ onSearch }) => {
+const SearchComp = () => {
   const [query, setQuery] = useState("");
+  const setTodoList = useSetAtom(todoListAtom);
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    if (query.trim() !== "") {
-      onSearch(query);
+
+    if (query.trim() === "") {
+      setTodoList([]);
+      return;
     }
+
+    try {
+      const { data, error } = await supabase
+        .from("todos")
+        .select("*")
+        .ilike("task", `%${query}%`); // Case-insensitive search
+
+      if (error) {
+        console.error("Error querying todos:", error);
+        setTodoList([]);
+        return;
+      }
+
+      setTodoList(data);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
+
+    setQuery("");
   };
 
   return (

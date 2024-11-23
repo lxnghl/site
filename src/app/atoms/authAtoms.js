@@ -3,6 +3,8 @@ import { supabase } from '../../lib/supabase';
 
 const redirectTo = process.env.REDIRECT_TO_TODOS_LINK;
 
+export const todoListAtom = atom([]);
+
 // Atom to store user session
 export const userAtom = atom(null);
 

@@ -7,10 +7,11 @@ import AddTodo from './AddTodo';
 import { formatDate, formatDateTime } from '../../lib/DateFormatter';
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/authAtoms';
+import { todoListAtom } from '../atoms/authAtoms';
 
 const DailyTodoList = () => {
   const [currentDate, setCurrentDate] = useState(formatDate(new Date()));
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useAtom(todoListAtom);
   const [newTask, setNewTask] = useState('');
   const [editTodoId, setEditTodoId] = useState(null); // Track which todo is being edited
   const [editTask, setEditTask] = useState(''); // Track the edited task text
@@ -123,53 +124,56 @@ const DailyTodoList = () => {
     <div className="flex flex-col justify-center items-center flex-grow overflow-auto">
       <div className="w-full md:w-3/5 bg-white shadow-2xl rounded-lg p-8 mb-2">
         <DateNavigator currentDate={currentDate} formatDate={formatDate} setCurrentDate={setCurrentDate} />
-  
+
         <AddTodo newTask={newTask} setNewTask={setNewTask} handleAddTodo={handleAddTodo} />
-  
+
         <ul className="space-y-2">
           {todoList.length > 0 ? (
-            todoList.map((todo) => (
-              <li
-                key={todo.id}
-                className="flex items-center space-x-4 p-4 bg-gray-100 rounded"
-              >
-                <input
-                  id={todo.id}
-                  type="checkbox"
-                  checked={todo.completed}
-                  onChange={() => handleToggleTodo(todo.id, todo.completed)}
-                  className="form-checkbox h-5 w-5 text-blue-600"
-                />
-  
-                <div className="flex-grow text-black">
-                  {editTodoId === todo.id && editTask.completed !== false ? (
-                    <input
-                      type="text"
-                      value={editTask}
-                      onChange={(e) => setEditTask(e.target.value)}
-                      onBlur={() => handleUpdateTodo(todo.id)} // Update on blur
-                      className="border rounded p-2 flex-grow mr-2"
-                    />
-                  ) : (
-                    <span className={todo.completed ? 'line-through text-gray-400' : ''}>
-                      {todo.task}
-                    </span>
-                  )}
-  
-                  <div className="flex justify-between text-gray-500 text-xs">
-                    <span>{`Created: ${formatDateTime(todo.createdAt)}`}</span>
-                    <span>{todo.completedAt ? `Done: ${formatDateTime(todo.completedAt)}` : null}</span>
+            [...todoList] // Create a copy to avoid mutating the original array
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // Sort by `createdAt` descending
+              .map((todo) => (
+                <li
+                  key={todo.id}
+                  className="flex items-center space-x-4 p-4 bg-gray-100 rounded"
+                >
+                  <input
+                    id={todo.id}
+                    type="checkbox"
+                    checked={todo.completed}
+                    onChange={() => handleToggleTodo(todo.id, todo.completed)}
+                    className="form-checkbox h-5 w-5 text-blue-600"
+                  />
+
+                  <div className="flex-grow text-black">
+                    {editTodoId === todo.id && editTask.completed !== false ? (
+                      <input
+                        type="text"
+                        value={editTask}
+                        onChange={(e) => setEditTask(e.target.value)}
+                        onBlur={() => handleUpdateTodo(todo.id)} // Update on blur
+                        className="border rounded p-2 flex-grow mr-2"
+                      />
+                    ) : (
+                      <span className={todo.completed ? 'line-through text-gray-400' : ''}>
+                        {todo.task}
+                      </span>
+                    )}
+
+                    <div className="flex justify-between text-gray-500 text-xs">
+                      <span>{`Created: ${formatDateTime(todo.createdAt)}`}</span>
+                      <span>{todo.completedAt ? `Done: ${formatDateTime(todo.completedAt)}` : null}</span>
+                    </div>
                   </div>
-                </div>
-  
-                <EditIcon onClick={() => handleEdit(todo)} />
-                <DeleteIcon onClick={() => handleDeleteTodo(todo.id)} />
-              </li>
-            ))
+
+                  <EditIcon onClick={() => handleEdit(todo)} />
+                  <DeleteIcon onClick={() => handleDeleteTodo(todo.id)} />
+                </li>
+              ))
           ) : (
             <li className="p-4 bg-gray-100 rounded text-black">No tasks for this day</li>
           )}
         </ul>
+
       </div>
     </div>
   );
