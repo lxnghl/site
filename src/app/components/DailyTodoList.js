@@ -8,6 +8,7 @@ import { formatDate, formatDateTime } from '../../lib/DateFormatter';
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/authAtoms';
 import { todoListAtom } from '../atoms/authAtoms';
+import RecurringIcon from './RecurringIcon';
 
 const DailyTodoList = () => {
   const [currentDate, setCurrentDate] = useState(formatDate(new Date()));
@@ -120,6 +121,29 @@ const DailyTodoList = () => {
     }
   };
 
+  const handleToggleRecurring = async (todoId, currentState) => {
+    try {
+      const { error } = await supabase
+        .from('todos')
+        .update({ isRecurring: !currentState })
+        .eq('id', todoId);
+  
+      if (error) {
+        console.error('Error toggling recurring status:', error);
+        return;
+      }
+  
+      // Update the local state to reflect the change
+      setTodoList((prev) =>
+        prev.map((todo) =>
+          todo.id === todoId ? { ...todo, isRecurring: !currentState } : todo
+        )
+      );
+    } catch (err) {
+      console.error('Unexpected error toggling recurring status:', err);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center flex-grow overflow-auto">
       <div className="w-full md:w-3/5 bg-white shadow-2xl rounded-lg p-8 mb-2">
@@ -165,8 +189,13 @@ const DailyTodoList = () => {
                     </div>
                   </div>
 
+                  <RecurringIcon
+                    isRecurring={todo.isRecurring}
+                    onClick={() => handleToggleRecurring(todo.id, todo.isRecurring)}
+                  />
                   <EditIcon onClick={() => handleEdit(todo)} />
                   <DeleteIcon onClick={() => handleDeleteTodo(todo.id)} />
+
                 </li>
               ))
           ) : (
