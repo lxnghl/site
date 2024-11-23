@@ -13,7 +13,8 @@ const AddTodo = ({ newTask, setNewTask, handleAddTodo }) => {
       />
       <button
         onClick={handleAddTodo}
-        className="bg-green-400 text-white py-2 px-4 rounded hover:bg-green-500 transition"
+        className="text-white py-2 px-4 rounded"
+        style={{ background: '#4CAF50'}}
       >
         Add
       </button>

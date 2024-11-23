@@ -7,7 +7,7 @@ const RecurringIcon = ({ isRecurring, onClick }) => {
 
   return (
     <button onClick={onClick} aria-label="Toggle Recurring Status">
-      <FontAwesomeIcon icon={faRotateRight} style={{ color: iconColor, fontSize: '20px' }} />
+      <FontAwesomeIcon icon={faRotateRight} style={{ color: iconColor, fontSize: '1.5rem' }} />
     </button>
   );
 };

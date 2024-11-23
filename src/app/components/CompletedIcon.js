@@ -15,7 +15,7 @@ const CompletedIcon = ({ isCompleted, onClick }) => {
         icon={faCheckCircle}
         style={{
           color: iconColor,
-          fontSize: '24px',
+          fontSize: '1.5rem',
         }}
       />
     </button>

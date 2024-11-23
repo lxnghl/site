@@ -189,14 +189,18 @@ const DailyTodoList = () => {
                     </div>
                   </div>
 
-
-                  <RecurringIcon
-                    isRecurring={todo.isRecurring}
-                    onClick={() => handleToggleRecurring(todo.id, todo.isRecurring)}
-                  />
-                  <EditIcon onClick={() => handleEdit(todo)} />
-                  <DeleteIcon onClick={() => handleDeleteTodo(todo.id)} />
-
+                  <div className="flex items-center space-x-4">  {/* Wrap icons here */}
+                    <RecurringIcon
+                      isRecurring={todo.isRecurring}
+                      onClick={() => handleToggleRecurring(todo.id, todo.isRecurring)}
+                    />
+                    <EditIcon
+                      onClick={() => handleEdit(todo)}
+                    />
+                    <DeleteIcon
+                      onClick={() => handleDeleteTodo(todo.id)}
+                    />
+                  </div>
                 </li>
               ))
           ) : (
@@ -207,6 +211,7 @@ const DailyTodoList = () => {
       </div>
     </div>
   );
+
 };
 
 export default DailyTodoList;
