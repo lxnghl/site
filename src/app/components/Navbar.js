@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/authAtoms'; // Adjust the import based on your structure
@@ -20,6 +20,23 @@ const Navbar = () => {
     await signOut(); // Call the signOut function
     setIsOpen(false);
   };
+
+  // Close the menu if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the click is outside the mobile menu or the toggle button
+      if (isOpen && !event.target.closest('.mobile-menu') && !event.target.closest('.menu-toggle')) {
+        setIsOpen(false); // Close the menu
+      }
+    };
+
+    // Listen for clicks outside the menu
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]); // Only re-run if `isOpen` changes
 
   return (
     <nav className="bg-gray-800 p-4 fixed top-0 w-full">
@@ -47,7 +64,10 @@ const Navbar = () => {
           )}
         </div>
         <div className="md:hidden flex items-center">
-          <button className="text-white focus:outline-none" onClick={toggleMenu}>
+          <button
+            className="text-white focus:outline-none menu-toggle" // Added unique class here
+            onClick={toggleMenu}
+          >
             <svg
               className="w-6 h-6"
               fill="none"
@@ -68,7 +88,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-800">
+        <div className="md:hidden bg-gray-800 mobile-menu">
           <Search />
           <Link href="/" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Home </Link>
           <Link href="/blog" className="block px-4 py-2 text-white hover:bg-gray-700" onClick={() => setIsOpen(false)}> Blog </Link>

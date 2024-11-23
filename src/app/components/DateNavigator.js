@@ -28,7 +28,8 @@ const DateNavigator = ({ currentDate, formatDate, setCurrentDate }) => {
       >
         Previous
       </button>
-      <h2 className="text-lg md:text-xl font-semibold truncate text-black">{prettyDate}</h2>
+      <h2 className="text-lg md:text-xl font-semibold truncate text-black"
+        onClick={() => window.location.reload()}>{prettyDate}</h2>
       <button
         onClick={handleNextDay}
         className="bg-blue-500 text-white py-2 px-4 w-24 rounded hover:bg-blue-600 transition"
