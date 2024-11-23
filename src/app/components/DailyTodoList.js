@@ -9,6 +9,7 @@ import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/authAtoms';
 import { todoListAtom } from '../atoms/authAtoms';
 import RecurringIcon from './RecurringIcon';
+import CompletedIcon from './CompletedIcon';
 
 const DailyTodoList = () => {
   const [currentDate, setCurrentDate] = useState(formatDate(new Date()));
@@ -127,12 +128,12 @@ const DailyTodoList = () => {
         .from('todos')
         .update({ isRecurring: !currentState })
         .eq('id', todoId);
-  
+
       if (error) {
         console.error('Error toggling recurring status:', error);
         return;
       }
-  
+
       // Update the local state to reflect the change
       setTodoList((prev) =>
         prev.map((todo) =>
@@ -160,12 +161,9 @@ const DailyTodoList = () => {
                   key={todo.id}
                   className="flex items-center space-x-4 p-4 bg-gray-100 rounded"
                 >
-                  <input
-                    id={todo.id}
-                    type="checkbox"
-                    checked={todo.completed}
-                    onChange={() => handleToggleTodo(todo.id, todo.completed)}
-                    className="form-checkbox h-5 w-5 text-blue-600"
+                  <CompletedIcon
+                    isCompleted={todo.completed}
+                    onClick={() => handleToggleTodo(todo.id, todo.completed)}
                   />
 
                   <div className="flex-grow text-black">
@@ -178,7 +176,7 @@ const DailyTodoList = () => {
                         className="border rounded p-2 flex-grow mr-2"
                       />
                     ) : (
-                      <span className={todo.completed ? 'line-through text-gray-400' : ''}>
+                      <span>
                         {todo.task}
                       </span>
                     )}
