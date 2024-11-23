@@ -181,11 +181,14 @@ const DailyTodoList = () => {
                       </span>
                     )}
 
-                    <div className="flex justify-between text-gray-500 text-xs">
+                    <div className="flex flex-col text-gray-500 text-xs">
                       <span>{`Created: ${formatDateTime(todo.createdAt)}`}</span>
-                      <span>{todo.completedAt ? `Done: ${formatDateTime(todo.completedAt)}` : null}</span>
+                      {todo.completedAt && (
+                        <span>{`Done: ${formatDateTime(todo.completedAt)}`}</span>
+                      )}
                     </div>
                   </div>
+
 
                   <RecurringIcon
                     isRecurring={todo.isRecurring}

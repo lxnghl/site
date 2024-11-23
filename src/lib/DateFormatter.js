@@ -11,7 +11,7 @@ export const formatDateTime = (dateString) => {
     year: '2-digit',
   });
 
-  return `${time}_${formattedDate}`;
+  return `${time} ${formattedDate}`;
 };
 
 export const formatDate = (date) => {
