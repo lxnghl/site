@@ -173,6 +173,11 @@ const DailyTodoList = () => {
                         value={editTask}
                         onChange={(e) => setEditTask(e.target.value)}
                         onBlur={() => handleUpdateTodo(todo.id)} // Update on blur
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            handleUpdateTodo(todo.id); // Trigger update on Enter key
+                          }
+                        }}
                         className="border rounded p-2 w-full mr-2"
                       />
                     ) : (
