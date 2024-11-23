@@ -173,7 +173,7 @@ const DailyTodoList = () => {
                         value={editTask}
                         onChange={(e) => setEditTask(e.target.value)}
                         onBlur={() => handleUpdateTodo(todo.id)} // Update on blur
-                        className="border rounded p-2 flex-grow mr-2"
+                        className="border rounded p-2 w-full mr-2"
                       />
                     ) : (
                       <span>
