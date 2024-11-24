@@ -44,11 +44,11 @@ const SearchComp = () => {
         placeholder="Search..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="bg-gray-700 text-white rounded-full pl-4 pr-10 py-2 focus:outline-none w-full"
+        className="bg-gray-200 text-black rounded-full pl-4 pr-10 py-2 focus:outline-none w-full"
       />
       <button
         type="submit"
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white focus:outline-none"
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black focus:outline-none"
         aria-label="Search"
       >
         <svg

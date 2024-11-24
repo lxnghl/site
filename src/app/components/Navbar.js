@@ -6,6 +6,7 @@ import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/authAtoms'; // Adjust the import based on your structure
 import { signOutAtom } from '../atoms/authAtoms'; // Import signOutAtom to handle logout
 import Search from './Search'; // Import the SearchComponent
+import Logo from './Logo';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,9 +42,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-800 p-4 fixed top-0 w-full">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white text-2xl font-bold">
-          <Link href="/">My Blog</Link>
-        </div>
+        <Logo/>
         <div className="hidden md:flex items-center space-x-6">
           <Search />
           <Link href="/" className="text-white hover:text-gray-400"> Home </Link>
