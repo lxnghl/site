@@ -14,11 +14,12 @@ const DateNavigator = ({ currentDate, formatDate, setCurrentDate }) => {
     setCurrentDate(formatDate(nextDate)); // Set the date in YYYY-MM-DD format
   };
 
-  const prettyDate = new Date(currentDate).toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  });
+  const prettyDate = currentDate.toLocaleDateString('ro-RO', {
+        weekday: 'long',
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+    });
 
   return (
     <div className="flex justify-between items-center mb-6">
