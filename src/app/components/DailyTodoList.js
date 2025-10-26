@@ -146,7 +146,7 @@ const DailyTodoList = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center flex-grow overflow-auto">
+    <div className="flex flex-col justify-center items-center grow overflow-auto">
       <div className="w-full md:w-3/5 bg-white shadow-2xl rounded-lg p-8 mb-2">
         <DateNavigator currentDate={currentDate} formatDate={formatDate} setCurrentDate={setCurrentDate} />
 
@@ -166,7 +166,7 @@ const DailyTodoList = () => {
                     onClick={() => handleToggleTodo(todo.id, todo.completed)}
                   />
 
-                  <div className="flex-grow text-black">
+                  <div className="grow text-black">
                     {editTodoId === todo.id && editTask.completed !== false ? (
                       <input
                         type="text"

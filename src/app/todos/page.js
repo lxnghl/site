@@ -6,7 +6,7 @@ import withAuth from '../withAuth';
 const Todos = () => {
   return (
     <div className="flex flex-col">
-      <div className="flex-grow flex justify-center">
+      <div className="grow flex justify-center">
         <DailyTodoList />
       </div>
     </div>

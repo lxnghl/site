@@ -10,29 +10,29 @@
     "pages:build": "npx @cloudflare/next-on-pages"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "@supabase/supabase-js": "^2.45.6",
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.0",
+    "@supabase/supabase-js": "^2.76.1",
     "gray-matter": "^4.0.3",
-    "gsap": "^3.12.5",
-    "jotai": "^2.10.1",
-    "next": "14.2.15",
-    "react": "^18",
-    "react-dom": "^18",
+    "gsap": "^3.13.0",
+    "jotai": "^2.15.0",
+    "next": "^15.5.2",
+    "path-to-regexp": "^8.3.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "tar": "^7.4.3",
-    "vercel": "^37.12.0",
-    "wrangler": "^3.81.0"
+    "tar": "^7.5.1",
+    "vercel": "^47.0.4",
+    "wrangler": "^4.45.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.5",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "@cloudflare/next-on-pages": "^1.13.16",
+    "@tailwindcss/postcss": "^4.1.16"
   },
   "main": "src/app/page.js",
-  "repository": "git@github.com:absinthian/site.git",
+  "repository": "git@github.com:lxnghl/site.git",
   "author": "Alex Anghel <alex@alexanghel.com>",
   "license": "MIT"
 }

@@ -1,5 +1,3 @@
-export const runtime = "edge";
-
 import { articles } from '../../../../content/articles';
 import { notFound } from 'next/navigation';
 
