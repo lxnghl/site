@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pages:build": "npx @cloudflare/next-on-pages"
+    "cf-build": "opennextjs-cloudflare build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
@@ -23,12 +23,12 @@
     "react-dom": "^19.2.0",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "tar": "^7.5.1",
-    "vercel": "^48.6.0",
-    "wrangler": "^4.45.0"
+    "tar": "^7.5.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.16"
+    "@tailwindcss/postcss": "^4.1.16",
+    "@opennextjs/cloudflare": "^1.0.0",
+    "wrangler": "^4.45.0"
   },
   "main": "src/app/page.js",
   "repository": "git@github.com:lxnghl/site.git",
