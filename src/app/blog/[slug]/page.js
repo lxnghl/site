@@ -8,9 +8,9 @@ export default function ArticleContent({ params }) {
   const article = articles.find((article) => article.link === slug);  // No need to check with "/blog/"
 
   // If the article is not found, show a 404 page
-  if (!article) {
-    return notFound();
-  }
+  // if (!article) {
+  //   return notFound();
+  // }
 
   return (
     <div className="container mx-auto p-4">
