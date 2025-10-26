@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { Roboto } from 'next/font/google';
 import SessionInitializer from './components/SessionInitializer';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const roboto = Roboto({
   weight: ['300'],
